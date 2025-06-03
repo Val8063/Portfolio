@@ -1,0 +1,342 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050721;
+  --foreground: #e2e8f0;
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --secondary: #10b981;
+  --accent: #8b5cf6;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --card: rgba(15, 23, 42, 0.5);
+  --card-foreground: #f8fafc;
+  --border: rgba(148, 163, 184, 0.2);
+  --input: #334155;
+  --ring: #3b82f6;
+  --radius: 0.5rem;
+  
+  --neon-blue: rgba(56, 182, 255, 0.8);
+  --neon-purple: rgba(124, 58, 237, 0.8);
+  --neon-teal: rgba(45, 212, 191, 0.8);
+  --scanline-color: rgba(120, 220, 255, 0.03);
+  --glitch-color-1: rgba(56, 182, 255, 0.6);
+  --glitch-color-2: rgba(124, 58, 237, 0.6);
+  
+  /* Variables pour le curseur personnalisé */
+  --cursor-size: 8px;
+  --cursor-outline-size: 24px;
+  --cursor-delay: 150ms;
+}
+
+.dark {
+  --background: #050721;
+  --foreground: #f8fafc;
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --secondary: #10b981;
+  --accent: #8b5cf6;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --card: rgba(15, 23, 42, 0.5);
+  --card-foreground: #f8fafc;
+  --border: rgba(148, 163, 184, 0.2);
+  --input: #334155;
+  --ring: #3b82f6;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #f8fafc;
+    --foreground: #0f172a;
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --secondary: #10b981;
+    --accent: #8b5cf6;
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+    --card: rgba(255, 255, 255, 0.8);
+    --card-foreground: #0f172a;
+    --border: rgba(148, 163, 184, 0.2);
+    --input: #e2e8f0;
+    --ring: #3b82f6;
+    --scanline-color: rgba(0, 0, 0, 0.02);
+    --glitch-color-1: rgba(0, 80, 180, 0.5);
+    --glitch-color-2: rgba(124, 58, 237, 0.5);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+  cursor: none; /* Masquer le curseur par défaut */
+}
+
+/* Personnalisation des polices */
+.font-sans {
+  font-family: var(--font-poppins), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.font-orbitron {
+  font-family: var(--font-orbitron), var(--font-sans);
+}
+
+/* Personnalisation de la scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-track-background::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.2);
+}
+
+.scrollbar-thumb-primary\/50::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.5);
+  border-radius: 3px;
+}
+
+.hover\:scrollbar-thumb-primary:hover::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.8);
+}
+
+/* Curseur personnalisé */
+.cursor-dot, .cursor-outline {
+  pointer-events: none;
+  position: fixed;
+  z-index: 9999;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  transition: opacity 0.15s ease-in-out;
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  background-color: var(--neon-blue);
+  box-shadow: 0 0 5px var(--neon-blue), 0 0 15px var(--neon-blue);
+  transform: translate(-50%, -50%);
+}
+
+.cursor-outline {
+  width: var(--cursor-outline-size);
+  height: var(--cursor-outline-size);
+  border: 1px solid var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.2s ease-in-out, opacity 0.15s ease-in-out;
+}
+
+/* Animations curseur */
+@media (hover: hover) and (pointer: fine) {
+  a:hover ~ .cursor-outline,
+  button:hover ~ .cursor-outline {
+    transform: translate(-50%, -50%) scale(1.5);
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+}
+
+/* Effet scanlines pour l'ambiance CRT */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 9990;
+}
+
+.scanlines::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--scanline-color) 0.5%,
+    transparent 1%
+  );
+  animation: scanline 10s linear infinite;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: inset(80% 0 0 0);
+    transform: translate(-2px, 2px);
+  }
+  20% {
+    clip-path: inset(10% 0 60% 0);
+    transform: translate(2px, -2px);
+  }
+  40% {
+    clip-path: inset(50% 0 0 0);
+    transform: translate(1px, 2px);
+  }
+  60% {
+    clip-path: inset(0 0 100% 0);
+    transform: translate(-1px, -1px);
+  }
+  80% {
+    clip-path: inset(0 0 60% 0);
+    transform: translate(2px, -2px);
+  }
+  100% {
+    clip-path: inset(80% 0 0 0);
+    transform: translate(-2px, 2px);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes pulse-neon {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+  }
+  50% {
+    box-shadow: 0 0 15px var(--neon-blue), 0 0 25px var(--neon-blue);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Effet glass */
+.glass {
+  background: rgba(15, 23, 42, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(56, 182, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.glass-card {
+  background: rgba(15, 23, 42, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(56, 182, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(20, 30, 60, 0.3);
+  border: 1px solid rgba(56, 182, 255, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 15px rgba(56, 182, 255, 0.1);
+  transform: translateY(-5px);
+}
+
+/* Effet néon pour les textes */
+.neon-text {
+  color: var(--foreground);
+  text-shadow: 0 0 5px var(--neon-blue), 0 0 15px var(--neon-blue);
+  transition: text-shadow 0.3s ease;
+}
+
+.neon-text:hover {
+  text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+}
+
+/* Bouton futuriste */
+.btn-futuristic {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(45deg, var(--primary-dark), var(--primary));
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-family: var(--font-orbitron);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+  z-index: 1;
+}
+
+.btn-futuristic::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.6s ease;
+  z-index: -1;
+}
+
+.btn-futuristic:hover {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-futuristic:hover::before {
+  left: 100%;
+}
+
+/* Animation du fond de grille pour les sections */
+.grid-bg {
+  background-size: 50px 50px;
+  background-image:
+    linear-gradient(to right, rgba(56, 182, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 182, 255, 0.05) 1px, transparent 1px);
+}
+
+/* Animation pour les projets en hover */
+.project-card-hover {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.project-card-hover:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 182, 255, 0.2);
+}
+
+/* Pour les appareils tactiles */
+@media (hover: none) {
+  body {
+    cursor: auto;
+  }
+  
+  .cursor-dot, .cursor-outline {
+    display: none;
+  }
+}
