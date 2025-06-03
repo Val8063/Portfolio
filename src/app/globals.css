@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #050721;
@@ -70,7 +72,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans, Arial, Helvetica, sans-serif);
-  cursor: none; /* Masquer le curseur par défaut */
+  /* Le curseur sera masqué uniquement par le script JavaScript sur les appareils non tactiles */
 }
 
 /* Personnalisation des polices */

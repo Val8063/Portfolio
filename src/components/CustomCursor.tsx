@@ -4,6 +4,14 @@ import { useEffect } from 'react';
 
 export default function CustomCursor() {
   useEffect(() => {
+    // Vérifier si l'appareil n'est pas tactile
+    if (window.matchMedia('(hover: none)').matches) {
+      return; // Ne pas initialiser sur les appareils tactiles
+    }
+    
+    // Masquer le curseur par défaut uniquement si le composant est monté
+    document.body.style.cursor = 'none';
+    
     const cursorDot = document.querySelector('.cursor-dot') as HTMLElement;
     const cursorOutline = document.querySelector('.cursor-outline') as HTMLElement;
     
@@ -13,7 +21,7 @@ export default function CustomCursor() {
     cursorDot.style.opacity = '0';
     cursorOutline.style.opacity = '0';
     
-    window.addEventListener('mousemove', (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       const posX = e.clientX;
       const posY = e.clientY;
       
@@ -30,26 +38,26 @@ export default function CustomCursor() {
         fill: 'forwards',
         easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
       });
-    });
+    };
     
     // Effet de clic
-    window.addEventListener('mousedown', () => {
+    const handleMouseDown = () => {
       cursorDot.style.transform = 'translate(-50%, -50%) scale(0.75)';
       cursorOutline.style.transform = 'translate(-50%, -50%) scale(0.75)';
       
       cursorDot.style.backgroundColor = 'rgba(124, 58, 237, 0.8)';
       cursorOutline.style.borderColor = 'rgba(124, 58, 237, 0.8)';
       cursorOutline.style.backgroundColor = 'rgba(124, 58, 237, 0.1)';
-    });
+    };
     
-    window.addEventListener('mouseup', () => {
+    const handleMouseUp = () => {
       cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
       cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
       
       cursorDot.style.backgroundColor = 'rgba(56, 182, 255, 0.8)';
       cursorOutline.style.borderColor = 'rgba(56, 182, 255, 0.8)';
       cursorOutline.style.backgroundColor = 'transparent';
-    });
+    };
     
     // Détection des éléments cliquables pour changer l'apparence du curseur
     const handleElementHover = () => {
@@ -64,42 +72,45 @@ export default function CustomCursor() {
       cursorOutline.style.borderWidth = '1px';
     };
     
+    // Masquer le curseur quand il quitte la fenêtre
+    const handleMouseLeave = () => {
+      cursorDot.style.opacity = '0';
+      cursorOutline.style.opacity = '0';
+    };
+    
+    const handleMouseEnter = () => {
+      cursorDot.style.opacity = '1';
+      cursorOutline.style.opacity = '1';
+    };
+    
+    // Appliquer les event listeners
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
+    document.body.addEventListener('mouseleave', handleMouseLeave);
+    document.body.addEventListener('mouseenter', handleMouseEnter);
+    
     // Appliquer l'effet sur tous les éléments interactifs
     document.querySelectorAll('a, button, input, textarea, select, [role="button"]').forEach(element => {
       element.addEventListener('mouseenter', handleElementHover);
       element.addEventListener('mouseleave', handleElementLeave);
     });
-    
-    // Masquer le curseur quand il quitte la fenêtre
-    document.body.addEventListener('mouseleave', () => {
-      cursorDot.style.opacity = '0';
-      cursorOutline.style.opacity = '0';
-    });
-    
-    document.body.addEventListener('mouseenter', () => {
-      cursorDot.style.opacity = '1';
-      cursorOutline.style.opacity = '1';
-    });
-    
-    // Désactiver sur mobile
-    if (window.matchMedia('(hover: none)').matches) {
-      cursorDot.style.display = 'none';
-      cursorOutline.style.display = 'none';
-    }
 
     // Nettoyage
     return () => {
-      window.removeEventListener('mousemove', () => {});
-      window.removeEventListener('mousedown', () => {});
-      window.removeEventListener('mouseup', () => {});
+      // Restaurer le curseur par défaut
+      document.body.style.cursor = 'auto';
+      
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
+      document.body.removeEventListener('mouseleave', handleMouseLeave);
+      document.body.removeEventListener('mouseenter', handleMouseEnter);
       
       document.querySelectorAll('a, button, input, textarea, select, [role="button"]').forEach(element => {
         element.removeEventListener('mouseenter', handleElementHover);
         element.removeEventListener('mouseleave', handleElementLeave);
       });
-      
-      document.body.removeEventListener('mouseleave', () => {});
-      document.body.removeEventListener('mouseenter', () => {});
     };
   }, []);
 

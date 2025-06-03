@@ -9,14 +9,14 @@ import FuturisticDivider from "@/components/FuturisticDivider";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col relative">
+    <main className="min-h-screen w-full flex flex-col relative">
       {/* Fond animé qui couvre toute la page */}
       <div className="fixed inset-0 z-0">
         <AnimatedBackground />
       </div>
       
       {/* Contenu du site avec positionnement au-dessus du fond */}
-      <div className="relative z-10">
+      <div className="relative z-10 w-full">
         <FuturisticHeader />
         
         <FuturisticDivider />
@@ -31,6 +31,6 @@ export default function Home() {
         <Footer />
         <BackToTop />
       </div>
-    </div>
+    </main>
   );
 }

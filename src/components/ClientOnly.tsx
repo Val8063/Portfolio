@@ -11,15 +11,19 @@ export default function ClientOnly({ children }: { children: React.ReactNode }) 
   }, []);
 
   if (!isMounted) {
-    return null;
+    return null; // Retourne null pendant le SSR
   }
 
   return (
     <>
-      {/* Curseur personnalisé pour l'ambiance futuriste */}
-      <div className="cursor-dot"></div>
-      <div className="cursor-outline"></div>
-      <CustomCursor />
+      {/* Curseur personnalisé uniquement sur les appareils non tactiles */}
+      {typeof window !== 'undefined' && !window.matchMedia('(hover: none)').matches && (
+        <>
+          <div className="cursor-dot"></div>
+          <div className="cursor-outline"></div>
+          <CustomCursor />
+        </>
+      )}
       {children}
     </>
   );

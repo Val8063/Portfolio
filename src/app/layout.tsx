@@ -53,7 +53,8 @@ export default function RootLayout({
   return (
     <html lang="fr" className="scroll-smooth dark">
       <body
-        className={`${poppins.variable} ${inter.variable} ${jetbrainsMono.variable} ${orbitron.variable} font-sans antialiased overflow-x-hidden scrollbar-thin scrollbar-track-background scrollbar-thumb-primary/50 hover:scrollbar-thumb-primary`}
+        className={`${poppins.variable} ${inter.variable} ${jetbrainsMono.variable} ${orbitron.variable} font-sans antialiased overflow-x-hidden w-full min-h-screen scrollbar-thin scrollbar-track-background scrollbar-thumb-primary/50 hover:scrollbar-thumb-primary`}
+        style={{ cursor: 'auto' }} // Restaurer le curseur par défaut pour éviter des problèmes sur mobile
       >
         {/* Effet de scanlines pour l'ambiance futuriste */}
         <div className="scanlines"></div>
