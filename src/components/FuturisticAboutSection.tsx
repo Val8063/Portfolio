@@ -81,7 +81,7 @@ export default function FuturisticAboutSection() {
       {
         icon: <FaGlobe />,
         title: "Anglais (niveau C1)",
-        description: "Je communique efficacement en anglais à l’oral comme à l’écrit (niveau C1 CECRL).",
+        description: "Je communique efficacement en anglais à l’oral comme à l’écrit.",
       },
       {
         icon: <FaUsers />,
