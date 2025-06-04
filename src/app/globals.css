@@ -47,27 +47,6 @@
   --ring: #3b82f6;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #f8fafc;
-    --foreground: #0f172a;
-    --primary: #3b82f6;
-    --primary-dark: #2563eb;
-    --secondary: #10b981;
-    --accent: #8b5cf6;
-    --muted: #f1f5f9;
-    --muted-foreground: #64748b;
-    --card: rgba(255, 255, 255, 0.8);
-    --card-foreground: #0f172a;
-    --border: rgba(148, 163, 184, 0.2);
-    --input: #e2e8f0;
-    --ring: #3b82f6;
-    --scanline-color: rgba(0, 0, 0, 0.02);
-    --glitch-color-1: rgba(0, 80, 180, 0.5);
-    --glitch-color-2: rgba(124, 58, 237, 0.5);
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);

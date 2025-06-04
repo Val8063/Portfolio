@@ -38,18 +38,18 @@ function FuturisticSkillCard({ icon, title, description, delay }: SkillCardProps
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-blue-500/10 z-0"></div>
       
       {/* Icône */}
-      <div className="text-blue-400 text-4xl mb-5 relative z-10 group-hover:text-blue-300 transition-colors duration-300">
+      <div className="text-primary text-4xl mb-5 relative z-10 group-hover:text-primary-dark transition-colors duration-300">
         {icon}
-        <div className="absolute -inset-2 bg-blue-400/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
+        <div className="absolute -inset-2 bg-primary/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
       </div>
       
       {/* Titre */}
-      <h3 className="font-cyber font-bold text-lg mb-3 relative z-10 text-blue-100 group-hover:text-blue-50 transition-colors duration-300">
+      <h3 className="font-cyber font-bold text-lg mb-3 relative z-10 text-foreground group-hover:text-foreground transition-colors duration-300">
         {title}
       </h3>
       
       {/* Description */}
-      <p className="text-blue-200/70 relative z-10 group-hover:text-blue-100/90 transition-colors duration-300">
+      <p className="text-muted-foreground relative z-10 group-hover:text-foreground transition-colors duration-300">
         {description}
       </p>
       
@@ -114,7 +114,7 @@ export default function FuturisticAboutSection() {
         >
           {/* Titre de section avec effet glitch */}
           <div className="inline-block">
-            <h2 className="text-3xl md:text-4xl font-cyber font-bold mb-4 inline-block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
+            <h2 className="text-3xl md:text-4xl font-cyber font-bold mb-4 inline-block">
               <GlitchText text="À propos de moi" />
             </h2>
           </div>
@@ -125,12 +125,12 @@ export default function FuturisticAboutSection() {
             whileInView={{ width: "100px" }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="h-[3px] bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto mb-8"
+            className="h-[3px] bg-gradient-to-r from-primary to-accent mx-auto mb-8"
           />
           
           {/* Description */}
           <motion.p 
-            className="text-lg text-blue-100/70 max-w-2xl mx-auto relative"
+            className="text-lg text-muted-foreground max-w-2xl mx-auto relative"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -149,8 +149,8 @@ export default function FuturisticAboutSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mt-8 inline-block"
           >
-            <div className="font-mono text-sm text-blue-300/80 bg-blue-950/30 px-4 py-2 rounded-lg border border-blue-500/20 inline-block">
-              <span className="text-blue-400">$</span> ./explorer <span className="text-purple-400">--technologies</span>
+            <div className="font-mono text-sm bg-muted px-4 py-2 rounded-lg border border-border inline-block">
+              <span className="text-primary">$</span> ./explorer <span className="text-accent">--technologies</span>
             </div>
           </motion.div>
         </motion.div>

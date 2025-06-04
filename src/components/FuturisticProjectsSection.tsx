@@ -11,7 +11,7 @@ export default function FuturisticProjectsSection() {
       description: "Le site que vous consultez actuellement, réalisé avec Next.js et Tailwind CSS, avec des animations avancées.",
       tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
       image: "/images/portfolio.webp",
-      github: "#"
+      github: "https://github.com/Val8063/Portfolio"
     },
     {
       title: "Wolf3D",

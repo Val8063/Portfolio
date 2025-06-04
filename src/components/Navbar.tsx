@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import ThemeToggle from './ThemeToggle';
 import GlitchText from './GlitchText';
 
 export default function Navbar() {
@@ -90,7 +89,7 @@ export default function Navbar() {
               >
                 <a 
                   href={link.href} 
-                  className="font-orbitron text-sm font-medium tracking-wider transition-colors hover:text-blue-400 py-2 px-1 relative"
+                  className="font-cyber font-bold text-lg transition-colors hover:text-blue-400 py-2 px-1 relative"
                 >
                   {link.name}
                   
@@ -126,13 +125,10 @@ export default function Navbar() {
               </motion.li>
             ))}
           </motion.ul>
-          
-          <ThemeToggle />
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-4">
-          <ThemeToggle />
           <motion.button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
@@ -213,7 +209,7 @@ export default function Navbar() {
                 >
                   <a 
                     href={link.href} 
-                    className="font-orbitron text-base font-medium tracking-wider flex items-center py-2 hover:text-blue-400 transition-colors"
+                    className="font-cyber font-bold text-lg flex items-center py-2 hover:text-blue-400 transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <span className="text-blue-500 mr-2">0{index + 1}.</span>
