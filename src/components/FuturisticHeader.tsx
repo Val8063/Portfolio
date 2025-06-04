@@ -127,7 +127,7 @@ export default function FuturisticHeader() {
             className="inline-block px-3 py-1 rounded-full border border-blue-500/50 bg-blue-500/10 text-blue-300 text-sm font-mono mb-6"
           >
             <span className="inline-block w-2 h-2 rounded-full bg-blue-400 mr-2 animate-pulse-neon"></span>
-            DÉVELOPPEUR CURIEUX ET PASSIONÉ
+            DÉVELOPPEUR CURIEUX
           </motion.div>
           
           {/* Nom avec effet de glitch */}
