@@ -26,7 +26,7 @@ export default function FuturisticProjectsSection() {
       description: "Corewar est un projet de programmation bas-niveau où plusieurs programmes s’affrontent dans une machine virtuelle en manipulant directement la mémoire, illustrant la logique des systèmes et l’optimisation du code.",
       tags: ["C", "Assembleur", "Gestion de la mémoire"],
       image: "/images/corewar.webp",
-      github: "#"
+      github: "https://github.com/Val8063/Corewar"
     }
   ];
 
